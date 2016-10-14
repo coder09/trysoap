@@ -1,7 +1,5 @@
 package com.example.anix.trysoap.Models;
 
-import com.squareup.okhttp.RequestBody;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.NamespaceList;
@@ -16,7 +14,9 @@ import org.simpleframework.xml.Root;
 @NamespaceList({
         @Namespace(reference = "http://www.w3.org/2001/XMLSchema-instance", prefix = "xsi"),
         @Namespace(reference = "http://www.w3.org/2001/XMLSchema", prefix = "xsd"),
-        @Namespace(prefix = "soap12", reference = "http://www.w3.org/2003/05/soap-envelope")
+        @Namespace(reference = "http://www.w3.org/2003/05/soap-envelope", prefix = "soap12"),
+        @Namespace(reference = "urn:Magento", prefix = "n0")
+
 })
 
 public class RequestEnvelope {

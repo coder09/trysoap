@@ -1,4 +1,4 @@
-package com.example.anix.trysoap.Models;
+package com.example.anix.trysoap.Models.Responses;
 
 /**
  * Created by anix on 9/10/16.

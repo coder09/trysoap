@@ -1,4 +1,4 @@
-package com.example.anix.trysoap.Models;
+package com.example.anix.trysoap.Models.Requests;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">TrySOAP</string>
+    <string name="mage_api_username">androidDev</string>
+    <string name="mage_api_apiKey">androidapikey</string>
+    <string name="MAGENTO_URL">http://onebagfull.com/anish/index.php</string>
 </resources>

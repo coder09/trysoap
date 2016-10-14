@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.anix.trysoap.MainActivity">
+    tools:context="com.example.anix.trysoap.Activities.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"

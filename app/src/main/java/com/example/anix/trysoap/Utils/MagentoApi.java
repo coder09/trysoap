@@ -5,8 +5,8 @@ package com.example.anix.trysoap.Utils;
  * Created by anix on 9/10/16.
  */
 
-import com.example.anix.trysoap.Models.LoginResponse;
 import com.example.anix.trysoap.Models.RequestEnvelope;
+import com.example.anix.trysoap.Models.Responses.LoginResponse;
 
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -25,6 +25,7 @@ public interface MagentoApi {
             "Accept-Charset: utf-8"
     })
 
-    @POST("/api/v2_soap?wsdl=1")
+    @POST("/api/v2_soap")
     void requestLoginOp(@Body RequestEnvelope body, Callback<LoginResponse> cb);
+
 }
