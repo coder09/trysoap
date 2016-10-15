@@ -1,5 +1,7 @@
 package com.example.anix.trysoap.Models;
 
+import com.example.anix.trysoap.Models.Requests.CatalogProductList;
+import com.example.anix.trysoap.Models.Requests.Login;
 import com.squareup.okhttp.MediaType;
 
 import org.simpleframework.xml.Element;
@@ -15,31 +17,38 @@ import okio.BufferedSink;
 
 public class RequestBody extends com.squareup.okhttp.RequestBody {
 
-    @Element(name = "n0:login", required = false)
-    private Object object;
+	@Element(name = Login.ROOT_NAME, required = false)
+	private Login login;
+	@Element(name = CatalogProductList.ROOT_NAME, required = false)
+	private CatalogProductList catalogProductList;
 
-    public RequestBody() {
-    }
+	public RequestBody() {
+	}
 
-    public RequestBody(Object obj) {
-        this.setObject(obj);
-    }
+	public Login getLogin() {
+		return login;
+	}
 
-    @Override
-    public MediaType contentType() {
-        return null;
-    }
+	public void setLogin(Login login) {
+		this.login = login;
+	}
 
-    @Override
-    public void writeTo(BufferedSink sink) throws IOException {
+	public CatalogProductList getCatalogProductList() {
+		return catalogProductList;
+	}
 
-    }
+	public void setCatalogProductList(CatalogProductList catalogProductList) {
+		this.catalogProductList = catalogProductList;
+	}
 
-    public Object getObject() {
-        return object;
-    }
+	@Override
+	public MediaType contentType() {
+		return null;
+	}
 
-    public void setObject(Object object) {
-        this.object = object;
-    }
+	@Override
+	public void writeTo(BufferedSink sink) throws IOException {
+
+	}
+
 }

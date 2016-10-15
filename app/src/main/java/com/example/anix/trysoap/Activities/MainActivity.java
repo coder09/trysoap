@@ -2,13 +2,9 @@ package com.example.anix.trysoap.Activities;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
-import com.example.anix.trysoap.Models.RequestBody;
-import com.example.anix.trysoap.Models.RequestEnvelope;
-import com.example.anix.trysoap.Models.Requests.Login;
+import com.example.anix.trysoap.Models.Requests.CatalogProductList;
 import com.example.anix.trysoap.Models.Responses.LoginResponse;
 import com.example.anix.trysoap.R;
 import com.example.anix.trysoap.Utils.MagentoApi;
@@ -23,21 +19,18 @@ import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.strategy.Strategy;
 
-import retrofit.Callback;
 import retrofit.RestAdapter;
-import retrofit.RetrofitError;
 import retrofit.client.OkClient;
-import retrofit.client.Response;
 import retrofit.converter.SimpleXMLConverter;
-
-import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
 	//    public static final String mage_api_username = "androidDev";
 //    public static final String mage_api_apiKey = "androidapikey";
 	private static final String MAGENTO_URL = "http://onebagfull.com/anish/index.php";
-
+	private MagentoApi api = getMagentoApiObject();
+	private LoginResponse lr = new LoginResponse();
+	private CatalogProductList cpl;
 	/**
 	 * ATTENTION: This was auto-generated to implement the App Indexing API.
 	 * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -63,68 +56,30 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		apiLogin();
-
+		lr.apiLogin(api);
+		cpl = new CatalogProductList(lr.getLoginReturn(), "default");
+		cpl.requestProductList(api);
 
 		// ATTENTION: This was auto-generated to implement the App Indexing API.
 		// See https://g.co/AppIndexing/AndroidStudio for more information.
 		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 	}
 
-	/*private void cBack( T obj ){
-		Callback<T> cb = new Callback<T>() {
-			@Override
-			public void success(T t, Response response) {
 
-			}
+	/*private void apiLogin() {
+		//Login login = new Login(getString(R.string.mage_api_username), getString(R.string.mage_api_apiKey));
+		RequestBody body = new RequestBody();
+		body.setLogin(login);
+		RequestEnvelope request = new RequestEnvelope(body);
 
-			@Override
-			public void failure(RetrofitError error) {
-
-			}
-		}
+		api.requestLoginOp(request, new LoginResponse());
 	}
 */
-	private void apiLogin() {
-		//output callback
-		Callback<LoginResponse> cb = new Callback<LoginResponse>() {
-			@Override
-			public void success(LoginResponse respEnv, Response response) {
-				if (respEnv.getErrorCode() != null && !respEnv.getErrorCode().isEmpty()) {
-					Log.e(TAG, "api error status code: " + respEnv.getErrorCode() + " " + respEnv.getErrorText());
-				} else {
-					Log.i(TAG, "success! " + respEnv.getLoginReturn());
-				}
-
-			}
-
-			@Override
-			public void failure(RetrofitError error) {
-				Log.e(TAG, "server error: " + error.toString());
-			}
-		};
-
-//input message
-		Login login = new Login(getString(R.string.mage_api_username), getString(R.string.mage_api_apiKey));
-		RequestEnvelope request = getRequestEnvelope(login);
-
-		MagentoApi api = getMagentoApiObject();
-
-		api.requestLoginOp(request, cb);
-	}
-
 	private MagentoApi getMagentoApiObject() {
 		RestAdapter restAdapter = getRestAdapter();
 		return restAdapter.create(MagentoApi.class);
 	}
 
-	@NonNull
-	private RequestEnvelope getRequestEnvelope(Object obj) {
-		RequestBody body = new RequestBody(obj);
-		RequestEnvelope request = new RequestEnvelope(body);
-
-		return request;
-	}
 
 	/**
 	 * ATTENTION: This was auto-generated to implement the App Indexing API.
