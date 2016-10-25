@@ -25,8 +25,6 @@ import retrofit.converter.SimpleXMLConverter;
 
 public class MainActivity extends AppCompatActivity {
 
-	//    public static final String mage_api_username = "androidDev";
-//    public static final String mage_api_apiKey = "androidapikey";
 	private static final String MAGENTO_URL = "http://onebagfull.com/anish/index.php";
 	private MagentoApi api = getMagentoApiObject();
 	private LoginResponse lr = new LoginResponse();
@@ -52,34 +50,24 @@ public class MainActivity extends AppCompatActivity {
 		return restAdapter;
 	}
 
+	private MagentoApi getMagentoApiObject() {
+		RestAdapter restAdapter = getRestAdapter();
+		return restAdapter.create(MagentoApi.class);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		lr.apiLogin(api);
-		cpl = new CatalogProductList(lr.getLoginReturn(), "default");
+		cpl = new CatalogProductList(lr.getLoginReturn());
 		cpl.requestProductList(api);
 
 		// ATTENTION: This was auto-generated to implement the App Indexing API.
 		// See https://g.co/AppIndexing/AndroidStudio for more information.
 		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 	}
-
-
-	/*private void apiLogin() {
-		//Login login = new Login(getString(R.string.mage_api_username), getString(R.string.mage_api_apiKey));
-		RequestBody body = new RequestBody();
-		body.setLogin(login);
-		RequestEnvelope request = new RequestEnvelope(body);
-
-		api.requestLoginOp(request, new LoginResponse());
-	}
-*/
-	private MagentoApi getMagentoApiObject() {
-		RestAdapter restAdapter = getRestAdapter();
-		return restAdapter.create(MagentoApi.class);
-	}
-
 
 	/**
 	 * ATTENTION: This was auto-generated to implement the App Indexing API.

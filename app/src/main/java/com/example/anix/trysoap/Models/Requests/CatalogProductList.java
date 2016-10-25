@@ -14,8 +14,9 @@ import org.simpleframework.xml.Root;
 @Root(name = CatalogProductList.ROOT_NAME, strict = false)
 public class CatalogProductList {
 	public static final String ROOT_NAME = "n0:catalogProductList";
+	public static final String STORE_VIEW = "default";
 
-	@Element(required = false)
+	@Element
 	private String sessionId;
 	//    @Element(required = false)
 //    Filter filters;
@@ -29,6 +30,11 @@ public class CatalogProductList {
 
 	public CatalogProductList() {
 
+	}
+
+	public CatalogProductList(String sessionId) {
+		this.setSessionId(sessionId);
+		this.setStoreView(STORE_VIEW);
 	}
 
 	public String getSessionId() {

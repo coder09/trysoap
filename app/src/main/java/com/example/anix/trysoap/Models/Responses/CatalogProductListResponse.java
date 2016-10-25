@@ -36,10 +36,14 @@ public class CatalogProductListResponse implements Callback<CatalogProductListRe
 
 	@Override
 	public void success(CatalogProductListResponse catalogProductListResponse, Response response) {
-		if (!catalogProductListResponse.errorCode.isEmpty() && !catalogProductListResponse.errorText.isEmpty()) {
-			Log.e(TAG, "ProductListResponse Api error: " + catalogProductListResponse.errorCode + "\n -> " + catalogProductListResponse.errorText);
-		} else {
-			Log.i(TAG, "success: " + catalogProductListResponse.storeView);
+		try {
+			if (!catalogProductListResponse.errorCode.isEmpty() && !catalogProductListResponse.errorText.isEmpty()) {
+				Log.e(TAG, "ProductListResponse Api error: " + catalogProductListResponse.errorCode + "\n -> " + catalogProductListResponse.errorText);
+			} else {
+				Log.i(TAG, "success: " + catalogProductListResponse.storeView);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
