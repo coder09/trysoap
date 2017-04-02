@@ -20,9 +20,9 @@ import static android.content.ContentValues.TAG;
  */
 @Root(name = CatalogProductListResponse.ROOT_NAME, strict = false)
 public class CatalogProductListResponse implements Callback<CatalogProductListResponse> {
-	public static final String ROOT_NAME = "n0:cataloProductListResponse";
+	public static final String ROOT_NAME = "n0:catalogProductListResponse";
 
-	@Path("Body/cataloProductListResponse")
+	@Path("Body/catalogProductListResponse")
 	@Element(name = "storeView", required = false)
 	private CatalogProductListArray storeView;
 

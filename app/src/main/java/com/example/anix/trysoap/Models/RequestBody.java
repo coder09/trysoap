@@ -2,6 +2,7 @@ package com.example.anix.trysoap.Models;
 
 import com.example.anix.trysoap.Models.Requests.CatalogProductList;
 import com.example.anix.trysoap.Models.Requests.Login;
+import com.example.anix.trysoap.Models.Requests.customerCustomerList;
 import com.squareup.okhttp.MediaType;
 
 import org.simpleframework.xml.Element;
@@ -21,8 +22,18 @@ public class RequestBody extends com.squareup.okhttp.RequestBody {
 	private Login login;
 	@Element(name = CatalogProductList.ROOT_NAME, required = false)
 	private CatalogProductList catalogProductList;
+	@Element(name = customerCustomerList.ROOT_NAME, required = false)
+	private customerCustomerList customerListRequest;
 
 	public RequestBody() {
+	}
+
+	public customerCustomerList getCustomerListRequest() {
+		return customerListRequest;
+	}
+
+	public void setCustomerListRequest(customerCustomerList customerListRequest) {
+		this.customerListRequest = customerListRequest;
 	}
 
 	public Login getLogin() {

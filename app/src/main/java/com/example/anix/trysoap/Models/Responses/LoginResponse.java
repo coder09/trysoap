@@ -9,6 +9,8 @@ import android.util.Log;
 import com.example.anix.trysoap.Models.RequestBody;
 import com.example.anix.trysoap.Models.RequestEnvelope;
 import com.example.anix.trysoap.Models.Requests.Login;
+import com.example.anix.trysoap.Models.Requests.customerCustomerList;
+import com.example.anix.trysoap.Utils.GetApi;
 import com.example.anix.trysoap.Utils.MagentoApi;
 
 import org.simpleframework.xml.Element;
@@ -55,6 +57,10 @@ public class LoginResponse implements Callback<LoginResponse> {
 			Log.e(TAG, "api error status code: " + loginResponse.getErrorCode() + " " + loginResponse.getErrorText());
 		} else {
 			Log.i(TAG, "success! " + loginResponse.getLoginReturn());
+			MagentoApi api = new GetApi().getMagentoApiObject();
+			customerCustomerList cuList = new customerCustomerList(this.getLoginReturn());
+			cuList.requestCustomerList(api);
+
 		}
 
 	}
